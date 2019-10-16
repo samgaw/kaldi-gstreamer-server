@@ -6,6 +6,12 @@ Kaldi GStreamer server
 This is a real-time full-duplex speech recognition server, based on
 the Kaldi toolkit and the GStreamer framework and implemented in Python.
 
+Advertisement
+-------------
+[Laboratory of Language Technology](https://www.taltech.ee/projects/language-technology-lab/) of Tallinn University of Technology is looking for a PhD student to work on speech recognition, with a focus on lightly code-switched speech (e.g. Finnish containing a lot of English technical terms). [More information about the topic, how to apply, requirements, funding](https://www.ttu.ee/projects/language-technology-lab/study-15/phd-studies-8/).
+
+*NB!* The position is still open!
+
 Features
 --------
 
@@ -19,7 +25,7 @@ Features
   * Supports persisting the acoustic model adaptation state between requests
   * Supports unlimited set of audio codecs (actually only those supported by GStreamer)
   * Supports rewriting raw recognition results using external programs (can be used for converting words to numbers, etc)
-  * Python, Java, Javascript clients are available
+  * Python, Java, Javascript, Haskell clients are available
 
 English demo that uses the server: http://bark.phon.ioc.ee/dictate/
 
@@ -27,6 +33,7 @@ Estonian demo: http://bark.phon.ioc.ee/dikteeri/
 
 Changelog
 ---------
+  * 2019-06-17: The postprocessing mechanism doesn't work properly with Tornado 5+. Use Tornado 4.5.3 if you need it.
   * 2018-04-25: Server should now work with Tornado 5 (thanks to @Gastron). If using Python 2, you might need to install the `futures` package (`pip install futures`).
   * 2017-12-27: Somewhat big changes in the way post-processor is invoked. The problem was that in some use cases, the program that is used for
     post-processing decoded sentences can take a lot of time (let's say 0.5 seconds). Under the previous architecture, post-processor was invoked
@@ -185,7 +192,7 @@ Also, download the DNN-based models for English, trained on the TEDLIUM speech c
 provided by Cantab Research. Run the `download-tedlium-nnet2.sh` under `test/models` to download the models (attention, 1.5 GB):
 
     cd test/models 
-    ./test/models/download-tedlium-nnet2.sh
+    ./download-tedlium-nnet2.sh
     cd ../../
 
 Before starting a worker, make sure that the GST plugin path includes the path where the `libgstkaldionline2.so` library you compiled earlier
@@ -345,6 +352,7 @@ Client software
 ---------------
 
 Javascript client is available here: https://kaljurand.github.io/dictate.js
+Haskell client is available here: https://github.com/alx741/kaldi-gstreamer-server-haskell-client
 
 Citing
 ------
